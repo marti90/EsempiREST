@@ -1,5 +1,8 @@
 package it.alfasoft.martina.resource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -9,6 +12,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import it.alfasoft.martina.dao.DipendenteDAO;
 import it.alfasoft.martina.model.Dipendente;
@@ -26,12 +31,12 @@ public class RisorseDipendente {
 //		return dDao.getDipendenti().get(codiceDip);
 //	}
 	
-//	@GET
-//	@Produces(MediaType.APPLICATION_XML)
-//	public List<Dipendente> getDipendenti(){
-//
-//		return new ArrayList<Dipendente>(dDao.getDipendenti().values());
-//	}
+	@GET
+	@Produces(MediaType.APPLICATION_XML)
+	public List<Dipendente> getDipendenti(){
+
+		return new ArrayList<Dipendente>(dDao.getDipendenti().values());
+	}
 	
 //	@Path("/{num}")
 //	@GET
@@ -51,9 +56,11 @@ public class RisorseDipendente {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public void aggiungiDipendente(Dipendente d){
+	public Response aggiungiDipendente(Dipendente d){
 		
 		dDao.getDipendenti().put(d.getCodiceDip(), d);
+		System.out.println("Post arrivato!"+d.getNome()+" "+d.getCognome());
+		return Response.status(Status.CREATED).build();
 	}
 	
 	@PUT
