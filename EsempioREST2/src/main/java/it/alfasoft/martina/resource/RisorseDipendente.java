@@ -1,4 +1,4 @@
-package it.alfasoft.martina.EsempioREST1;
+package it.alfasoft.martina.resource;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -41,13 +41,13 @@ public class RisorseDipendente {
 //		return num+" "+(num+num);
 //	}
 	
-//	@Path("/{codiceDipendente}")
-//	@GET
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public Dipendente getDipendente(@PathParam("codiceDipendente") String codiceDip){
-//		
-//		return dDao.getDipendenti().get(codiceDip);
-//	}
+	@Path("/{codiceDipendente}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Dipendente getDipendente(@PathParam("codiceDipendente") String codiceDip){
+		
+		return dDao.getDipendenti().get(codiceDip);
+	}
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -78,12 +78,20 @@ public class RisorseDipendente {
 		
 	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Dipendente getDipendente(@QueryParam("codice") String codiceDip,
-			                        @QueryParam("numero") int n){
-		System.out.println("Valore ricevuto = "+n);
-		return dDao.getDipendenti().get(codiceDip);
+//	@GET
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public Dipendente getDipendente(@QueryParam("codice") String codiceDip,
+//			                        @QueryParam("numero") int n){
+//		System.out.println("Valore ricevuto = "+n);
+//		return dDao.getDipendenti().get(codiceDip);
+//	}
+	
+	//Se viene scritto un URL di questo tipo:
+	//http://localhost:8085/NomeApplicazione/webapi(o alfasoft dipende come lo definiamo)/dipendenti/{codice dipendente}
+	//arriva a questo metodo e viene reindirizzato a RisorsaBuste
+	@Path("/{codiceDipendente}/bustepaghe")
+	public RisorsaBuste getBustePaghe(){
+		return new RisorsaBuste();
 	}
 
 }

@@ -1,4 +1,4 @@
-package it.alfasoft.martina.EsempioREST1;
+package it.alfasoft.martina.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
