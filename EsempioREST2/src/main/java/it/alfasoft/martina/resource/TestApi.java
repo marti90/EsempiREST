@@ -17,7 +17,7 @@ import javax.ws.rs.core.UriInfo;
 @Produces(MediaType.TEXT_PLAIN)     //Dobbiamo scrivere cosa ci produce il metodo
 public class TestApi {
 	
-	@GET                                //Dobbiamo scrivere il metodo
+	@GET                            //Dobbiamo scrivere il metodo
 	public String metodoProva(){
 		return "Ciao!";
 	}

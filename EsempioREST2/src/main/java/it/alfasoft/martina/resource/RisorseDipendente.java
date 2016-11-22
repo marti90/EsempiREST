@@ -11,9 +11,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import it.alfasoft.martina.dao.DipendenteDAO;
 import it.alfasoft.martina.model.Dipendente;
@@ -31,12 +33,12 @@ public class RisorseDipendente {
 //		return dDao.getDipendenti().get(codiceDip);
 //	}
 	
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	public List<Dipendente> getDipendenti(){
-
-		return new ArrayList<Dipendente>(dDao.getDipendenti().values());
-	}
+//	@GET
+//	@Produces(MediaType.APPLICATION_XML)
+//	public List<Dipendente> getDipendenti(){
+//
+//		return new ArrayList<Dipendente>(dDao.getDipendenti().values());
+//	}
 	
 //	@Path("/{num}")
 //	@GET
@@ -49,9 +51,27 @@ public class RisorseDipendente {
 	@Path("/{codiceDipendente}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Dipendente getDipendente(@PathParam("codiceDipendente") String codiceDip){
+	public Dipendente getDipendenteByCode(@PathParam("codiceDipendente") String codiceDip,
+			@Context UriInfo uri){
 		
-		return dDao.getDipendenti().get(codiceDip);
+		Dipendente d = dDao.getDipendenti().get(codiceDip);
+		String link= uri.getBaseUriBuilder()
+				        .path(RisorseDipendente.class)
+				        .path(codiceDip)
+				        .build()
+				        .toString();
+		
+		//d.addLink(link,"self");
+		String linkBuste= uri.getBaseUriBuilder()
+				             .path(RisorseDipendente.class)
+				             .path(codiceDip) 
+				             .path("bustePaga")
+				             .build()
+				             .toString();
+		
+		//d.addLink(linkBuste,"buste");
+		
+		return d;
 	}
 	
 	@POST

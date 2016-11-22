@@ -19,5 +19,7 @@ public class Invocazioni {
 		
 		return targetDipendenti.path(codice).request().buildGet();
 	}
+	
+	
 
 }

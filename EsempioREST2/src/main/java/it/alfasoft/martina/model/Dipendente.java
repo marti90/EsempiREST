@@ -52,5 +52,7 @@ public class Dipendente {
 	public void setCodiceDip(String codiceDip) {
 		this.codiceDip = codiceDip;
 	}
+	
+	
 
 }
